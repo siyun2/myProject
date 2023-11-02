@@ -37,7 +37,7 @@ function Login({ navigation }) {
       <View style={styles.btn}>
         <TouchableOpacity
           style={styles.loginButton}
-          onPress={() => navigation.navigate("Join")}
+          onPress={() => {}}
         >
           <Text style={styles.loginButtonText}>로그인</Text>
         </TouchableOpacity>
@@ -50,19 +50,19 @@ function Login({ navigation }) {
         >
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Image
-              source={require('../assets/kakaologo.png')} // 카카오 로고 이미지 경로를 적절히 수정하세요
-              style={{ width: 20, height: 20, marginRight: 15, marginTop :1 }} // 로고 이미지 크기 및 간격 조절
+              source={require('../assets/kakaologo.png')} 
+              style={{ width: 20, height: 20, marginRight: 15, marginTop :1 }} 
             />
             <Text style={styles.kakaoLoginButtonText}>카카오 로그인</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <View style={styles.others}>
+      <View style={styles.others}> 
         <TouchableOpacity onPress={() => navigation.navigate('Join')}>
           <Text style={styles.linkText}>회원가입</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.linkText}>비밀번호 찾기</Text>
+        <TouchableOpacity onPress={()=>navigation.navigate("FindPw")}>
+          <Text style={styles.linkText} >비밀번호 찾기</Text>
         </TouchableOpacity>
       </View>
 

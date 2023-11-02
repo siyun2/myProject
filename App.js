@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import Login from './App/pages/Login';
 import Join from './App/pages/Join';
+import FindPw from './App/pages/FindPw';
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -24,6 +25,15 @@ function App() {
           component={Join}
           options={{
             headerTitle: '회원가입',
+            headerTitleAlign: 'center',
+
+          }}
+        />
+        <Stack.Screen
+          name="FindPw"
+          component={FindPw}
+          options={{
+            headerTitle: '비밀번호 찾기',
             headerTitleAlign: 'center',
           }}
         />
