@@ -1,12 +1,17 @@
 import React from 'react';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Dimensions} from 'react-native';
 import {Calendar} from 'react-native-calendars';
 
 // ---------------------------------------------------------
 import Icon from 'react-native-vector-icons/Feather';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
-const Main = ({ navigation } ) => {
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+console.log(windowWidth);
+console.log(windowHeight);
+
+const Main = ({navigation}) => {
   const [dates, setDates] = React.useState(['2023-10-31']);
   const today = new Date();
   const todayString = today.toISOString().split('T')[0];
@@ -68,7 +73,9 @@ const Main = ({ navigation } ) => {
           markedDates={markedDates}
           headerStyle={headerStyle}></Calendar>
       </View>
-      <TouchableOpacity style={styles.cameraBtn} onPress={handleCameraBtnPress}>
+      <TouchableOpacity
+        style={styles.cameraBtn}
+        onPress={() => navigation.navigate('Category')}>
         <View style={styles.circle}>
           <Icon
             name="camera"
@@ -85,18 +92,21 @@ const Main = ({ navigation } ) => {
 const styles = StyleSheet.create({
   calendar: {
     height: '75%',
-    marginTop: '40%',
+    marginTop: windowHeight*0.15,
     borderBottomColor: '#ffffff',
   },
   calendarContainer: {
-    width: '95%',
-    height: '50%',
+    width: windowWidth,
+    height: windowHeight,
     alignSelf: 'center', // 가운데 정렬
     paddingHorizontal: 15, // 좌우 마진을 15
+    backgroundColor: 'white',
   },
   cameraBtn: {
     alignItems: 'center',
-    marginTop: '85%',
+    // marginTop: '-80%',
+    marginTop: windowHeight*(-0.2),
+    // marginBottom: windowHeight*40,
   },
   circle: {
     width: 98,
@@ -125,7 +135,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between', // 요소 양 쪽 끝에 배치
     alignItems: 'center', // 세로 방향 가운데 정렬
     // backgroundColor: 'blue',
-    marginTop: 60,
+    marginTop: windowHeight*0.07,
   },
   bellBtn: {
     marginRight: 15,

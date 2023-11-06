@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { ImageBackground, View, TextInput, Text, StyleSheet, Image, Button, TouchableOpacity } from "react-native";
+import { ImageBackground, View, TextInput, Text, StyleSheet, Dimensions, Image, Button, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
+const  windowWidth  = Dimensions.get("window").width;
+const  windowHeight  = Dimensions.get("window").height;
 
 function Join({ navigation }) {
     return (
@@ -11,6 +14,7 @@ function Join({ navigation }) {
             scrollEnabled={true}
         >
             <ImageBackground source={require('../assets/backColor.png')} style={styles.container}>
+
                 <Text style={{ ...styles.text, marginLeft: 28 }}>이메일 입력</Text>
                 <View style={styles.inputContainer}>
                     <TextInput style={styles.emailInputText} />
@@ -24,9 +28,10 @@ function Join({ navigation }) {
                 <TextInput style={styles.inputText} />
                 <Text style={{ ...styles.text, marginLeft: 1 }}>닉네임</Text>
                 <TextInput style={styles.inputText} />
-                <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate("Login")}>
-                    <Text style={styles.loginButtonText}>회원가입</Text>
+                <TouchableOpacity style={styles.JoinButton} onPress={() => navigation.navigate("Login")}>
+                    <Text style={styles.JoinButtonText}>회원가입</Text>
                 </TouchableOpacity>
+
             </ImageBackground>
         </KeyboardAwareScrollView>
     );
@@ -37,12 +42,12 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        width: 400,
-        height: 680
+        width: windowWidth,
+        height: windowHeight
     },
     inputText: {
         backgroundColor: "white",
-        paddingVertical: 15,
+        paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 10,
         marginVertical: 20,
@@ -59,16 +64,16 @@ const styles = StyleSheet.create({
         color: "black",
         fontSize: 15,
     },
-    loginButton: {
+    JoinButton: {
         backgroundColor: "#7254F5",
         padding: 15,
         borderRadius: 10,
         alignItems: "center",
         width: '80%',
-        marginVertical: 20,
+        marginVertical: 150,
         marginTop: 20
     },
-    loginButtonText: {
+    JoinButtonText: {
         fontWeight: "bold",
         color: "white",
         fontSize: 15,

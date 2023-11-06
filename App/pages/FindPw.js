@@ -6,8 +6,12 @@ import {
     StyleSheet,
     TouchableOpacity,
     ImageBackground,
+    Dimensions,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
+const  windowWidth  = Dimensions.get("window").width;
+const  windowHeight  = Dimensions.get("window").height;
 
 function FindPw({ navigation }) {
     const [email, setEmail] = useState("");
@@ -34,7 +38,7 @@ function FindPw({ navigation }) {
         >
             <ImageBackground
                 source={require("../assets/backColor.png")}
-                style={styles.backgroundImage}
+                style={styles.container}
             >
                 <View style={styles.headerContent}>
                     <Text style={{ ...styles.text, marginRight: 230 }}>이메일 입력</Text>
@@ -99,10 +103,10 @@ function FindPw({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    backgroundImage: {
+    container: {
         flex: 1,
-        width: 400,
-        height: 680
+        width: windowWidth,
+        height: windowHeight
     },
     headerContent: {
         alignItems: "center",

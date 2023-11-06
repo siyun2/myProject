@@ -6,6 +6,7 @@ import Main from './App/pages/Main';
 import Login from './App/pages/Login';
 import Join from './App/pages/Join';
 import FindPw from './App/pages/FindPw';
+import Category from './App/pages/Category'
 
 
 function App() {
@@ -43,6 +44,15 @@ function App() {
           component={Main}
           options={{
             headerTitle: 'Main',
+            headerTitleAlign: 'center',
+            header: () => null,
+          }}
+        />
+        <Stack.Screen
+          name="Category"
+          component={Category}
+          options={{
+            headerTitle: 'Category',
             headerTitleAlign: 'center',
             header: () => null,
           }}

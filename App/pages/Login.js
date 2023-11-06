@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import { ImageBackground, View, TextInput, Text, StyleSheet, Image, Button, TouchableOpacity } from "react-native";
+import { ImageBackground, View, TextInput, Text, StyleSheet, Image, Button, TouchableOpacity, Dimensions } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
+const  windowWidth  = Dimensions.get("window").width;
+const  windowHeight  = Dimensions.get("window").height;
+
 
 function Login({ navigation }) {
   const [id, setId] = useState("")
@@ -82,8 +86,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 400,
-    height: 750
+    width : windowWidth,
+    height : windowHeight
 
   },
   img: {
