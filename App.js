@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
+import React, {useEffect} from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Main from './App/pages/Main';
 import Login from './App/pages/Login';
 import Join from './App/pages/Join';
 import FindPw from './App/pages/FindPw';
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 function App() {
@@ -35,6 +36,15 @@ function App() {
           options={{
             headerTitle: '비밀번호 찾기',
             headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="Main"
+          component={Main}
+          options={{
+            headerTitle: 'Main',
+            headerTitleAlign: 'center',
+            header: () => null,
           }}
         />
       </Stack.Navigator>

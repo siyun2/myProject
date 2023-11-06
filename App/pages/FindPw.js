@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { ImageBackground, View, TextInput, Text, StyleSheet, Image, Button, TouchableOpacity } from "react-native";
+import {
+    View,
+    TextInput,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+    ImageBackground,
+} from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 function FindPw({ navigation }) {
     const [email, setEmail] = useState("");
@@ -18,52 +26,87 @@ function FindPw({ navigation }) {
     };
 
     return (
-        <ImageBackground
-            source={require('../assets/backColor.png')}
-            style={styles.container}
+        <KeyboardAwareScrollView
+            style={{ flex: 1 }}
+            showsVerticalScrollIndicator={false}
+            resetScrollToCoords={{ x: 0, y: 0 }}
+            scrollEnabled={true}
         >
-            <Text style={{ ...styles.text, marginLeft: 28 }}>이메일 입력</Text>
-            <TextInput
-                style={styles.inputText}
-                value={email}
-                onChangeText={text => setEmail(text)}
-            />
-            <TouchableOpacity style={styles.checkBtn} onPress={handleCheckEmail}>
-                <Text style={styles.checkBtnText}>다음</Text>
-            </TouchableOpacity>
-
-            {showPasswordFields && (
-                <View>
+            <ImageBackground
+                source={require("../assets/backColor.png")}
+                style={styles.backgroundImage}
+            >
+                <View style={styles.headerContent}>
+                    <Text style={{ ...styles.text, marginRight: 230 }}>이메일 입력</Text>
                     <TextInput
                         style={styles.inputText}
-                        placeholder="새 비밀번호"
-                        value={newPassword}
-                        onChangeText={text => setNewPassword(text)}
+                        value={email}
+                        onChangeText={(text) => {
+                            if (!showPasswordFields) {
+                                setEmail(text);
+                            }
+                        }}
+                        editable={!showPasswordFields} 
                     />
-                    <TextInput
-                        style={styles.inputText}
-                        placeholder="비밀번호 확인"
-                        value={confirmPassword}
-                        onChangeText={text => setConfirmPassword(text)}
-                    />
-                    <TouchableOpacity style={styles.checkBtn}onPress={() => navigation.navigate("Login")}>
-                        <Text style={styles.checkBtnText}>확인</Text>
+                    <TouchableOpacity
+                        style={styles.checkBtn}
+                        onPress={() => {
+                            if (!showPasswordFields) {
+                                if (email === "abc") {
+                                    setShowPasswordFields(true);
+                                    setErrorMessage("");
+                                } else {
+                                    setErrorMessage("등록된 회원 정보가 없습니다");
+                                }
+                            }
+                        }}
+                        disabled={showPasswordFields} 
+                    >
+                        <Text style={styles.checkBtnText}>다음</Text>
                     </TouchableOpacity>
+                    {errorMessage !== "" && (
+                        <Text style={styles.errorMessage}>{errorMessage}</Text>
+                    )}
                 </View>
-            )}
 
-            {errorMessage !== "" && ( // errorMessage가 비어있지 않은 경우에만 출력
-                <Text style={styles.errorMessage}>{errorMessage}</Text>
-            )}
-        </ImageBackground>
+
+                {showPasswordFields && (
+                    <View style={styles.newPw}>
+                        <Text style={{ ...styles.text, marginRight: 190 }}>새로운 비밀번호</Text>
+                        <TextInput
+                            style={styles.inputText}
+                            value={newPassword}
+                            onChangeText={(text) => setNewPassword(text)}
+                        />
+                        <Text style={{ ...styles.text, marginRight: 160, marginTop: 20 }}>새로운 비밀번호 확인</Text>
+                        <TextInput
+                            style={styles.inputText}
+                            value={confirmPassword}
+                            onChangeText={(text) => setConfirmPassword(text)}
+                        />
+                        <TouchableOpacity
+                            style={styles.checkBtn}
+                            onPress={() => navigation.navigate("Login")}
+                        >
+                            <Text style={styles.checkBtnText}>확인</Text>
+                        </TouchableOpacity>
+                    </View>
+                )}
+
+            </ImageBackground>
+        </KeyboardAwareScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    backgroundImage: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        width: 400,
+        height: 680
+    },
+    headerContent: {
+        alignItems: "center",
+        marginTop: 50,
     },
     inputText: {
         backgroundColor: "white",
@@ -73,7 +116,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         fontSize: 18,
         width: 320,
-        height : 50,
+        height: 50,
     },
     checkBtn: {
         backgroundColor: "#7254F5",
@@ -89,7 +132,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     text: {
-        marginRight: 250,
+
         fontWeight: "bold",
         color: "black",
         fontSize: 15,
@@ -97,9 +140,14 @@ const styles = StyleSheet.create({
     errorMessage: {
         color: "red",
         fontSize: 15,
-        marginTop: 10, // errorMessage와 다음 버튼 사이의 간격 조절
-        marginBottom : 150
+        marginTop: 10,
     },
+    newPw: {
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 80
+    },
+
 });
 
 export default FindPw;

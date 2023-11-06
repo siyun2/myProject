@@ -1,81 +1,89 @@
 import React, { useState } from "react";
 import { ImageBackground, View, TextInput, Text, StyleSheet, Image, Button, TouchableOpacity } from "react-native";
-
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 function Login({ navigation }) {
   const [id, setId] = useState("")
   const [pw, setPw] = useState("")
 
   return (
-    <ImageBackground
-      source={require('../assets/backColor.png')}
-      style={styles.container} >
+    <KeyboardAwareScrollView
+      style={{ flex: 1 }}
+      showsVerticalScrollIndicator={false}
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      scrollEnabled={true}
+    >
+      <ImageBackground
+        source={require('../assets/backColor.png')}
+        style={styles.container} >
 
-      <View>
-        <Image
-          style={styles.img}
-          source={require('../assets/logo3.png')}
-        />
-      </View>
+        <View>
+          <Image
+            style={styles.img}
+            source={require('../assets/logo3.png')}
+          />
+        </View>
 
-      <TextInput
-        placeholder="Email"
-        style={{ ...styles.input, marginBottom: 5 }}
-        placeholderTextColor="#AB9EF4"
-      >
-      </TextInput>
-
-      <TextInput
-        placeholder="Password"
-        style={{ ...styles.input, marginBottom: 30 }}
-        secureTextEntry
-        returnKeyType="done"
-        keyboardType="email-address"
-        placeholderTextColor="#AB9EF4"
-      ></TextInput>
-
-      <View style={styles.btn}>
-        <TouchableOpacity
-          style={styles.loginButton}
-          onPress={() => {}}
+        <TextInput
+          placeholder="Email"
+          style={{ ...styles.input, marginBottom: 5 }}
+          placeholderTextColor="#AB9EF4"
         >
-          <Text style={styles.loginButtonText}>로그인</Text>
-        </TouchableOpacity>
+        </TextInput>
 
-        <TouchableOpacity
-          style={styles.kakaoLoginButton}
-          onPress={() => {
+        <TextInput
+          placeholder="Password"
+          style={{ ...styles.input, marginBottom: 30 }}
+          secureTextEntry
+          returnKeyType="done"
+          keyboardType="email-address"
+          placeholderTextColor="#AB9EF4"
+        ></TextInput>
 
-          }}
-        >
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Image
-              source={require('../assets/kakaologo.png')} 
-              style={{ width: 20, height: 20, marginRight: 15, marginTop :1 }} 
-            />
-            <Text style={styles.kakaoLoginButtonText}>카카오 로그인</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.others}> 
-        <TouchableOpacity onPress={() => navigation.navigate('Join')}>
-          <Text style={styles.linkText}>회원가입</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>navigation.navigate("FindPw")}>
-          <Text style={styles.linkText} >비밀번호 찾기</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.btn}>
+          <TouchableOpacity
+            style={styles.loginButton}
+            onPress={() => navigation.navigate("Main")}
+          >
+            <Text style={styles.loginButtonText}>로그인</Text>
+          </TouchableOpacity>
 
-    </ImageBackground>
+          <TouchableOpacity
+            style={styles.kakaoLoginButton}
+            onPress={() => {
+
+            }}
+          >
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Image
+                source={require('../assets/kakaologo.png')}
+                style={{ width: 20, height: 20, marginRight: 15, marginTop: 1 }}
+              />
+              <Text style={styles.kakaoLoginButtonText}>카카오 로그인</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.others}>
+          <TouchableOpacity onPress={() => navigation.navigate('Join')}>
+            <Text style={styles.linkText}>회원가입</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("FindPw")}>
+            <Text style={styles.linkText} >비밀번호 찾기</Text>
+          </TouchableOpacity>
+        </View>
+
+      </ImageBackground>
+    </KeyboardAwareScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
     alignItems: 'center',
     justifyContent: 'center',
+    width: 400,
+    height: 750
 
   },
   img: {
